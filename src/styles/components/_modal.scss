@@ -108,8 +108,13 @@
     opacity: 0;
 }
 .modal-enter .modal-container {
-    transform: scale(0.9);
+    transform: scale(1.1);
+    @include mq($from: tablet) {
+        transform: scale(0.9);
+    }
 },
 .modal-leave-active .modal-container {
-    transform: scale(1.1);
+    @include mq($from: tablet) {
+        transform: scale(1.1);
+    }
 }
