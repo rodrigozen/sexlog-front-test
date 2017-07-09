@@ -3,6 +3,8 @@
     flex-direction: row;
     width: 100%;
     overflow: hidden;
+    margin-top: -1px;
+    border: 1px solid rgb(232, 232, 232);
 }
 
 .step {
@@ -13,8 +15,6 @@
     text-align: center;
     background-color: rgb(232, 232, 232);
     color: rgb(150, 150, 150);
-    border: 1px solid rgb(232, 232, 232);
-    margin-top: -1px;
     &.is-active {
         background-color: rgb(255,255,255);
         color: $primary;

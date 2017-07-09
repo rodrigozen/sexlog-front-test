@@ -4,8 +4,12 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import Modal from './components/Modal';
+import BigRadio from './components/BigRadio';
 
 Vue.config.productionTip = false;
+
+Vue.component('v-modal', Modal);
+Vue.component('v-big-radio', BigRadio);
 
 /* eslint-disable no-new */
 new Vue({
@@ -14,5 +18,3 @@ new Vue({
     template: '<App/>',
     components: { App },
 });
-
-Vue.component('v-modal', Modal);
