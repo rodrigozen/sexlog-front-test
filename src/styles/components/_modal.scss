@@ -37,6 +37,7 @@
 }
 
 .modal-header {
+    position: relative;
     display: flex;
     border-bottom: 1px solid rgb(232,232,232);
     .modal-title {
@@ -50,14 +51,17 @@
         font-weight: 700;
     }
     .modal-close {
-        width: 50px;
+        position: absolute;
         display: flex;
+        right: 0;
+        width: 50px;
+        height: 100%;
         align-items: center;
         justify-content: center;
         border-left: 1px solid rgb(232,232,232);
+        background-color: rgb(255, 255, 255);
         color: $primary;
         svg {
-
             .close-x {
                 width: 12px;
                 stroke: rgb(98, 98, 98);
@@ -93,7 +97,6 @@
 
 .modal-body {
     display: flex;
-    overflow: scroll;
     height: 100%;
 }
 
