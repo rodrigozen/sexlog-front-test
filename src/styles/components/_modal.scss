@@ -1,0 +1,112 @@
+@import '../vendors/mq';
+
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.84);
+    display: table;
+    transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+    @include mq($from: tablet) {
+        padding: 10px;
+    }
+}
+
+.modal-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0px auto;
+    background-color: rgb(255, 255, 255);
+    transition: all .3s ease;
+    @include mq($from: tablet) {
+        position: relative;
+        border-radius: 5px;
+        border: 1px solid rgb(232,232,232);
+    };
+}
+
+.modal-header {
+    display: flex;
+    border-bottom: 1px solid rgb(232,232,232);
+    .modal-title {
+        cursor: default;
+        align-self: center;
+        flex-grow: 1;
+        padding: 12px;
+        text-align: center;
+        margin-top: 0;
+        color: $primary;
+        font-weight: 700;
+    }
+    .modal-close {
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-left: 1px solid rgb(232,232,232);
+        color: $primary;
+        svg {
+
+            .close-x {
+                width: 12px;
+                stroke: rgb(98, 98, 98);
+                fill: transparent;
+                stroke-linecap: round;
+                stroke-width: 3.5;
+            }
+            transition: 0.2s;
+        }
+        &:hover {
+            .close-x {
+                stroke: $primary;
+            }
+            svg {
+                transform: scale(1.2);
+            }
+        }
+    }
+}
+
+.modal-footer {
+    position: fixed;
+    display: block;
+    bottom:0;
+    min-height: 30px;
+    width: 100%;
+    border-top: 1px solid rgb(232,232,232);
+    background-color: rgb(255, 255, 255);
+    @include mq($from: tablet) {
+        position: relative;
+    };
+}
+
+.modal-body {
+    display: flex;
+    overflow: scroll;
+    height: 100%;
+}
+
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-leave-active {
+    opacity: 0;
+}
+.modal-enter .modal-container {
+    transform: scale(0.9);
+},
+.modal-leave-active .modal-container {
+    transform: scale(1.1);
+}
