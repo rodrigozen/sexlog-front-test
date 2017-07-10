@@ -39,7 +39,7 @@
         position: relative;
         display: flex;
         align-items: center;
-        padding: 18px 12px;
+        padding: 20px 12px;
         border: 1px solid rgb(204, 204, 204);
         background-color: white;
         margin: 5px;
@@ -47,7 +47,7 @@
         color: $primary;
         cursor: pointer;
         @include mq($from: tablet) {
-            padding: 18px;
+            padding: 20px;
         }
         &:before {
             @include mq($from: tablet) {

@@ -4,7 +4,7 @@
         <v-modal v-if="showModal" @close="closeModal" class="modal">
             <h3 slot="header">Assine o Sexlog VIP</h3>
             <div slot="body" class='content'>
-                <ul id="stepsAssinatura" class="steps">
+                <ul id="stepsAssinatura" class="steps semi-bold">
                     <li @click="goToPanel('Plans')" class="step" :class='{"is-active": (panel == "Plans")}'>Escolha o plano ideal pra você</li>
                     <li @click="goToPanel('Payment')" class="step" :class='{"is-active": (panel == "Payment")}'>Escolha a forma de pagamento</li>
                 </ul>
@@ -48,11 +48,7 @@ export default {
 
 <style scoped lang="scss">
 @import '../styles/vendors/mq';
-.modal {
-    .modal-container {
-        max-width: 800px;
-    }
-}
+
 #stepsAssinatura {
     @include mq($until: tablet) {
         display: none;

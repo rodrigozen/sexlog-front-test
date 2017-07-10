@@ -6,3 +6,7 @@ body {
     right: 0;
     background: rgb(230, 230, 230);
 }
+
+#price .total b {
+    color: $primary;
+}
