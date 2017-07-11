@@ -196,7 +196,7 @@ export default {
     strong {
         transition: 0.2s;
     }
-    color: #49cba4;
+    color: $secondary;
     font-size:1.1rem;
 }
 

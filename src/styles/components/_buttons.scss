@@ -1,0 +1,27 @@
+.button {
+    display: block;
+    background: white;
+    border: 1px solid rgb(128, 128, 128);
+    padding: 8px 25px;
+    margin: 0px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    letter-spacing: 0.07em;
+    outline: 0;
+    &.is-large {
+        font-size: 1rem;
+        padding: 20px 40px;
+    }
+
+    &.is-secondary {
+        background: $secondary;
+        color: white;
+        border: 1px solid darken($secondary, 10%);
+    }
+
+    &.is-primary {
+        background: $primary;
+        color: white;
+        border: 1px solid darken($secondary, 10%);
+    }
+}

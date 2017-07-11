@@ -9,6 +9,9 @@
                     <li @click="goToPanel('Payment')" class="step" :class='{"is-active": (panel == "Payment")}'>Escolha a forma de pagamento</li>
                 </ul>
                 <component :is='panel'></component>
+            <div class="footer" slot="footer">
+                <button class="button is-secondary is-large semi-bold pull-right" v-if="panel === 'Plans'" @click="goToPanel('Payment')">Próximo passo: pagamento</button>
+                <button class="button is-secondary is-large semi-bold pull-right" v-if="panel === 'Payment'" @click="$broadcast('submit')">Concluir minha assinatura</button>
             </div>
         </v-modal>
     </div>
@@ -54,4 +57,22 @@ export default {
         display: none;
     }
 }
+
+.footer {
+
+    @include mq($from: tablet) {
+        padding: 10px 30px;
+    }
+    button {
+        width: 100%;
+        @include mq($until: tablet) {
+            border: 0;
+            border-radius: 0;
+        }
+        @include mq($from: tablet) {
+            width:50%;
+        }
+    }
+}
+
 </style>
