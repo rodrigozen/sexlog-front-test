@@ -4,7 +4,7 @@
          "id":1,
          "name":"1 mês",
          "discount":"",
-         "total":"Total: R$ 49,90 em até 1x no cartão de crédito",
+         "total":"Total: <b>R$ 49,90</b> em até 1x no cartão de crédito",
          "price":{
             "currency":"R$",
             "integer":49,
@@ -20,12 +20,12 @@
       },
       {
          "id":2,
-         "name":"3 mês",
+         "name":"3 meses",
          "discount":"Economize 40%",
-         "total":"Total: R$ 89,70 em até 3x iguais no cartão de crédito",
+         "total":"Total: <b>R$ 89,70</b> em até 3x iguais no cartão de crédito",
          "price":{
             "currency":"R$",
-            "integer":29,
+            "integer":39,
             "decimal":90,
             "periodicy":"/mês"
          },
@@ -42,9 +42,9 @@
       },
       {
          "id":3,
-         "name":"6 mês",
+         "name":"6 meses",
          "discount":"Economize 54%",
-         "total":"Total: R$ 89,70 em até 3x iguais no cartão de crédito",
+         "total":"Total: <b>R$ 89,70</b> em até 3x iguais no cartão de crédito",
          "price":{
             "currency":"R$",
             "integer":29,
