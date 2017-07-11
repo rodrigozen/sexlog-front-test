@@ -1,6 +1,6 @@
 <template lang="html">
     <label class="big-radio">
-        <input :name='name' type="radio" :checked="checked ? checked : null">
+        <input :name='name' type="radio" :value='value' @change="$emit('input', $event.target.value)" :checked="checked ? checked : null" >
         <div class="big-radio-wrapper">
             <div class="big-radio-dot"></div>
             <div class="big-radio-label">
@@ -19,6 +19,9 @@ export default {
         checked: {
             type: Boolean,
             default: false,
+        },
+        value: {
+            type: [String, Number],
         },
     },
 };

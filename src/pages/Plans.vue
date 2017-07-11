@@ -1,27 +1,27 @@
 <template>
     <div class="wrapper">
-        <div id="price">
+        <div id="price" v-if='selectedPlan'>
             <div class="value">
                 <div class="currency">
-                    {{price.currency}}
+                    {{selectedPlan.price.currency}}
                 </div>
                 <div class="integer">
-                    {{price.integer}}
+                    {{selectedPlan.price.integer}}
                 </div>
                 <div>
                     <div class="decimal">
-                        {{price.decimal}}
+                        {{selectedPlan.price.decimal}}
                     </div>
                     <div class="periodicy">
-                        {{price.periodicy}}
+                        {{selectedPlan.price.periodicy}}
                     </div>
                 </div>
             </div>
-            <div class="total smaller" v-html="total">
+            <div class="total smaller" v-html="selectedPlan.total">
             </div>
-            <div class="payment-methods smaller" v-if="payments && payments.length">
+            <div class="payment-methods smaller" v-if="selectedPlan.payments && selectedPlan.payments.length">
                 <ul>
-                    <li v-for="(payment,key) in payments" class="smaller">
+                    <li v-for="(payment,key) in selectedPlan.payments" class="smaller">
                         <img v-if="assets[key]" :src="'static/'+assets[key]" class="icon" >
                         <span v-html="payment"></span>
                     </li>
@@ -30,79 +30,61 @@
         </div>
         <div id="paymentOptions">
             <ul>
-                <li>
-                    <v-big-radio name="a" checked>
+                <li v-for='plan in plans'>
+                    <v-big-radio name="plan"
+                        :value='plan.id'
+                        @input='selectPlan' :model="selectedPlanId"
+                        :checked="selectedPlanId == plan.id" >
                         <span slot='label'>
                             <h3 class="inline-block">
-                                <strong>1 mês</strong>
-                            </h3>
-                        </span>
-                    </v-big-radio>
-                </li>
-                <li>
-                    <v-big-radio name="a">
-                        <span slot='label'>
-                            <h3 class="inline-block">
-                                <strong>3 meses</strong>
+                                <strong>{{plan.name}}</strong>
                             </h3>
                             <span class="pull-right smaller">
-                                Economize
+                                {{plan.discount[0]}}
                                 <span class="percent">
-                                    <strong>30%</strong>
-                                </span>
-                            </span>
-                        </span>
-                        <span slot='label-secondary'></span>
-                    </v-big-radio>
-                </li>
-                <li>
-                    <v-big-radio name="a">
-                        <span slot='label'>
-                            <h3 class="inline-block">
-                                <strong>6 meses</strong>
-                            </h3>
-                            <span class="pull-right smaller">
-                                Economize
-                                <span class="percent">
-                                    <strong>50%</strong>
+                                    <strong>{{plan.discount[1]}}</strong>
                                 </span>
                             </span>
                         </span>
                     </v-big-radio>
                 </li>
-
             </ul>
         </div>
     </div>
 </template>
 
 <script>
-
 export default {
     name: 'plans',
+    props: {
+        serverPlans: {
+            type: Array,
+        },
+        selectedPlanId: {
+            type: Number,
+            default: 1,
+        },
+    },
     data() {
         return {
             assets: ['icon-credit-card.svg', 'icon-debit.svg', 'icon-boleto.svg'],
-            name: '6 mês',
-            discount: 'Economize 54%',
-            total: 'Total: <b>R$ 89,70</b> em até 3x iguais no cartão de crédito',
-            price: {
-                currency: 'R$',
-                integer: 29,
-                decimal: 90,
-                periodicy: '/mês',
-            },
-            parc: [
-                'Parcelado em 1x de R$ 89,70',
-                'Parcelado em 2x de R$ 44,85',
-                'Parcelado em 3x de R$ 29,90',
-            ],
-            payments: [
-                'Até 6x iguais no <b>cartão de crédito</b>',
-                'Parcela única no <b>débito em conta</b>',
-                'Pagamento no <b>boleto bancário</b>',
-            ],
         };
+    },
+    computed: {
+        plans() {
+            return this.serverPlans.map(plan => Object.assign({}, plan, {
+                discount: plan.discount ? plan.discount.match(/(.*?)(\d*%)/).slice(1) : '',
+            }));
+        },
+        selectedPlan() {
+            return this.plans.find(p => p.id === this.selectedPlanId);
+        },
+    },
+    methods: {
+        selectPlan(id) {
+            this.selectedPlanId = +id;
+            this.$emit('input', this.selectedPlanId);
+        },
     },
 };
 </script>
