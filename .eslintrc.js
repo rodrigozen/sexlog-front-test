@@ -37,7 +37,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
 
     "indent": ["error", 4],
-    "import/no-webpack-loader-syntax": "off"
+    "import/no-webpack-loader-syntax": "off",
+    "no-unused-expression": "off"
 
   }
 }
