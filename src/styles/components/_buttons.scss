@@ -8,6 +8,8 @@
     font-size: 0.8rem;
     letter-spacing: 0.07em;
     outline: 0;
+    cursor: pointer;
+
     &.is-large {
         font-size: 1rem;
         padding: 20px 40px;
@@ -17,11 +19,17 @@
         background: $secondary;
         color: white;
         border: 1px solid darken($secondary, 10%);
+        &:focus {
+            border: 1px solid darken($secondary, 30%);
+        }
     }
 
     &.is-primary {
         background: $primary;
         color: white;
-        border: 1px solid darken($secondary, 10%);
+        border: 1px solid darken($primary, 10%);
+        &:focus {
+            border: 1px solid darken($primary, 30%);
+        }
     }
 }

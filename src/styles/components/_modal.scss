@@ -80,6 +80,35 @@
             }
         }
     }
+    .modal-back {
+        @include mq($from: tablet) {
+            display: none;
+        }
+        position: absolute;
+        display: flex;
+        left: 0;
+        width: 50px;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(255, 255, 255);
+        color: $primary;
+        svg {
+            .back-icon {
+                width: 12px;
+                stroke: rgb(180, 180, 180);
+                fill: transparent;
+                stroke-linecap: round;
+                stroke-width: 3.5;
+            }
+            transition: 0.2s;
+        }
+        &:hover {
+            .back-icon {
+                stroke: rgb(120, 120, 120);
+            }
+        }
+    }
 }
 
 .modal-footer {
@@ -99,8 +128,18 @@
 
 .modal-body {
     display: flex;
+    flex-shrink: 0;
+    flex-grow: 1;
     height: 100%;
-    background-color: rgb(245, 245, 245)
+
+    background-color: rgb(245, 245, 245);
+    & > * {
+        overflow-y: auto;
+        padding-bottom: 6em;
+        @include mq($from: tablet) {
+            padding-bottom: 0px;
+        };
+    }
 }
 
 .modal-enter {

@@ -12,6 +12,9 @@ Vue.config.productionTip = false;
 Vue.component('v-modal', Modal);
 Vue.component('v-big-radio', BigRadio);
 
+const bus = new Vue();
+Vue.prototype.$bus = bus;
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

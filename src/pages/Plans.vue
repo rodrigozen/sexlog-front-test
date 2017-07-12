@@ -82,8 +82,7 @@ export default {
     },
     methods: {
         selectPlan(id) {
-            this.selectedPlanId = +id;
-            this.$emit('input', this.selectedPlanId);
+            this.$emit('input', +id);
         },
     },
 };
@@ -106,6 +105,7 @@ export default {
 #price {
     flex: 1 1 0;
     .value {
+        position: relative;
         display: flex;
         justify-content: center;
         padding: 10px;

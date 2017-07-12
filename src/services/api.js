@@ -7,6 +7,14 @@ export const getServerData = function getServerData() {
     });
 };
 
+export const postServerData = function postServerData() {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(), 300);
+    });
+};
+
+
 export default {
     getServerData,
+    postServerData,
 };

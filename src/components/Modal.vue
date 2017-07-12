@@ -4,6 +4,11 @@
             <div class="modal-wrapper">
                 <div class="modal-container">
                     <div class="modal-header">
+                        <div v-if="backButton" class="modal-back is-clicable" @click="$emit('goBack')">
+                            <svg viewbox="0 0 10 10" width="15" height="15">
+                              <path class="back-icon" d="M 5,7.5 L 10,12.5 M 10,2.5 L 5,7.5" />
+                            </svg>
+                        </div>
                         <div class="modal-title">
                             <slot name="header"></slot>
                         </div>
@@ -29,6 +34,12 @@
 
 <script>
 export default {
+    props: {
+        'back-button': {
+            type: Boolean,
+            default: false,
+        },
+    },
     data() {
         return {};
     },

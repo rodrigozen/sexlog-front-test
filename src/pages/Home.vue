@@ -1,12 +1,16 @@
 <template>
     <div class="home">
-        <button @click="openModal">Assine conteúdo VIP</button>
-        <v-modal v-if="showModal" @close="closeModal" @goBack="goBack" class="modal">
+        <button class="button is-primary" @click="openModal">Assine conteúdo VIP</button>
+        <v-modal v-if="showModal" @close="closeModal" @goBack="goBack" :back-button="(panel !== 'Plans')" class="modal">
             <h3 slot="header">Assine o Sexlog VIP</h3>
             <div slot="body" class='content'>
-                <ul id="stepsAssinatura" class="steps semi-bold">
-                    <li @click="goToPanel('Plans')" class="step" :class='{"is-active": (panel == "Plans")}'>Escolha o plano ideal pra você</li>
-                    <li @click="goToPanel('Payment')" class="step" :class='{"is-active": (panel == "Payment")}'>Escolha a forma de pagamento</li>
+                <ul class="steps semi-bold stepsAssinatura">
+                    <li v-if="panel !== 'SignUpFeedback'" @click="goToPanel('Plans')" class="step" :class='{"is-active": (panel == "Plans")}'>
+                        Escolha o plano ideal pra você
+                    </li>
+                    <li v-if="panel !== 'SignUpFeedback'" @click="goToPanel('Payment')" class="step" :class='{"is-active": (panel == "Payment")}'>
+                        Escolha a forma de pagamento
+                    </li>
                 </ul>
                 <plans
                     v-if="panel === 'Plans'"
@@ -14,12 +18,13 @@
                     :selectedPlanId="selectedPlanId"
                     @input="(id) => selectedPlanId = id"
                     />
-                <payment v-if="panel === 'Payment'"></payment>
+                <payment :selectedPlan='selectedPlan' v-if="panel === 'Payment'"></payment>
                 <signUpFeedback :closeModal="closeModal" v-if="panel === 'SignUpFeedback'"></signUpFeedback>
             </div>
-            <div class="footer" slot="footer">
+            <div class="footer" slot="footer" v-if="panel !== 'SignUpFeedback'">
+                <img :src="'static/icon-secure.png'">
                 <button class="button is-secondary is-large semi-bold pull-right" v-if="panel === 'Plans'" @click="goToPanel('Payment')">Próximo passo: pagamento</button>
-                <button class="button is-secondary is-large semi-bold pull-right" v-if="panel === 'Payment'" @click="$broadcast('submit')">Concluir minha assinatura</button>
+                <button class="button is-secondary is-large semi-bold pull-right" v-if="panel === 'Payment'" @click="$bus.$emit('submit-singup')">Concluir minha assinatura</button>
             </div>
         </v-modal>
     </div>
@@ -35,11 +40,16 @@ export default {
     name: 'home',
     data() {
         return {
-            showModal: true,
+            showModal: false,
             plans: [],
             panel: 'Plans',
             selectedPlanId: 1,
         };
+    },
+    computed: {
+        selectedPlan() {
+            return this.plans.find(p => p.id === this.selectedPlanId) || {};
+        },
     },
     methods: {
         goToPanel(panel) {
@@ -47,9 +57,14 @@ export default {
         },
         openModal() {
             this.showModal = true;
+            this.panel = 'Plans';
         },
         closeModal() {
             this.showModal = false;
+        },
+        goBack() {
+            const sequence = ['Plans', 'Payment', 'SignUpFeedback'];
+            this.panel = sequence[sequence.indexOf(this.panel) - 1];
         },
     },
     components: {
@@ -61,6 +76,9 @@ export default {
         getServerData().then((data) => {
             this.plans = data.plans;
         });
+        this.$bus.$on('submit-success', () => {
+            this.goToPanel('SignUpFeedback');
+        });
     },
 };
 </script>
@@ -68,7 +86,11 @@ export default {
 <style scoped lang="scss">
 @import '../styles/vendors/mq';
 
-#stepsAssinatura {
+.home > button {
+    margin: 30px auto;
+}
+
+.stepsAssinatura {
     @include mq($until: tablet) {
         display: none;
     }
@@ -76,7 +98,15 @@ export default {
 
 .footer {
 
+    img {
+        display: none;
+    }
+
     @include mq($from: tablet) {
+        img {
+            display: inline-block;
+            padding: 10px 20px;
+        }
         padding: 10px 30px;
     }
     button {

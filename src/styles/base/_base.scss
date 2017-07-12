@@ -24,3 +24,14 @@ ul {
 .inline-block {
     display: inline-block;
 }
+
+.divider {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-top: 1px solid gainsboro;
+    margin: 10px 0px;
+    &.is-dashed {
+        border-style: dashed;
+    }
+}
