@@ -38,7 +38,7 @@ module.exports = {
 
     "indent": ["error", 4],
     "import/no-webpack-loader-syntax": "off",
-    "no-unused-expression": "off"
-
+    "no-unused-expression": "off",
+    "linebreak-style": "off"
   }
 }
